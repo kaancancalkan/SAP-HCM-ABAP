@@ -3,8 +3,8 @@ REPORT zhr_kaanilkabap.
 *Variables
 DATA: gv_persname TYPE pad_vorna,
       gv_perssurname TYPE pad_nachn,
-      gv_sexno TYPE hrpad_gender,
-      gv_sex TYPE string,
+      gv_genderno TYPE hrpad_gender,
+      gv_gender TYPE string,
       gs_pa0002 TYPE pa0002,
       gt_pa0002 TYPE TABLE OF pa0002.
 
@@ -21,34 +21,34 @@ SELECT * FROM pa0002
 *  Selecting data to screen
   SELECT SINGLE: vorna FROM pa0002 INTO gv_persname WHERE pernr = gv_perno AND endda EQ '99991231',
                  nachn FROM pa0002  INTO gv_perssurname WHERE pernr = gv_perno AND endda EQ '99991231',
-                 gesch FROM pa0002 INTO gv_sexno WHERE pernr = gv_perno AND endda EQ '99991231'.
+                 gesch FROM pa0002 INTO gv_genderno WHERE pernr = gv_perno AND endda EQ '99991231'.
 
 
 
 *Converting Number to String
 
-     IF gv_sexno = 1.
-   gv_sex = ' Erkek'.
-  ELSEIF gv_sexno = 2.
-   gv_sex  = 'Kadın'.
+     IF gv_genderno = 1.
+   gv_gender = ' Erkek'.
+  ELSEIF gv_genderno = 2.
+   gv_gender  = 'Kadın'.
     ELSE.
-     gv_sex = 'LGBT Birey'.
+     gv_gender = 'LGBT Birey'.
   ENDIF.
 
 * Fix for issue about default value
   IF gv_persname EQ ''.
-    gv_sex = ''.
+    gv_gender = ''.
     ENDIF.
 
 * Writing variables to screen
     WRITE: 'Bu personelin Adı', Gv_persname  ,
     / 'Soyadı', gv_perssurname,
-    / 'Cinsiyeti' , gv_Sex.
+    / 'Cinsiyeti' , gv_gender.
 * Clearing vars and tables.
 
     CLEAR gv_perno.
     CLEAR gv_persname.
     CLEAR gv_perssurname.
-    CLEAR gv_sex.
+    CLEAR gv_gender.
     CLEAR gs_pa0002.
     CLEAR Gt_pa0002.
