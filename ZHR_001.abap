@@ -32,7 +32,7 @@ SELECT * FROM pa0002
   ELSEIF gv_genderno = 2.
    gv_gender  = 'Kadın'.
     ELSE.
-     gv_gender = 'LGBT Birey'.
+     gv_gender = 'Diger'.
   ENDIF.
 
 * Fix for issue about default value
